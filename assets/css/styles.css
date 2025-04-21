@@ -1,0 +1,70 @@
+body {
+    background-color: #A8CEE8;
+}
+
+
+iframe {
+    border-radius: 15px;
+}
+
+header {
+    background-color: #334C75;
+}
+
+#navbarText ul li a {
+    color: blanchedalmond;
+}
+
+#navbarText ul li a:hover{
+    color:rgb(148, 223, 148);
+}
+
+
+button {
+    background-color: #5F99D2;
+    border-radius: 10px;
+    height: 45px;
+
+
+}
+
+nav button:hover{
+ background-color:rgb(148, 223, 148);
+}
+footer a .imgRedes {
+    height: 40px;
+}
+
+
+
+ .modal-body{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+
+} 
+
+.formulario{
+    max-width: 400px;
+    width: 100%;
+    padding: 2rem;
+    background-color:#A8CEE8;
+    border: 2px solid #1e3d59;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+} 
+
+.nosotros{
+    background-color:#5F99D2;
+    color: aliceblue;
+    border-style: double;
+    border-radius: 15px;
+}
+
+.telefono{
+    font-size: 50px;
+}
+
