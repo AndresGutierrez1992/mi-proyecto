@@ -16,7 +16,7 @@ videos.forEach(video => {
   col.className = "col-sm-12 col-md-4";
 
   col.innerHTML = `
-    <div class="ratio ratio-16x9">
+    <div class="ratio ratio-16x9 rounded shadow">
       <iframe src="${video.url}"
         title="YouTube video player" frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

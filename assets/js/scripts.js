@@ -10,7 +10,9 @@ log.addEventListener("click", function (event) {
     console.log(mail.value, contrasen.value)
 
     if (mail.value == correo && contrasen.value == contrasena) {
-        window.open("/mi-proyecto/administrador.html", "_self", "")
+        // window.open("administrador.html", "_self", "")
+        localStorage.setItem("logueado", "true");
+        window.location.href = "administrador.html";
     } else {
         window.alert("datos incorrectos");
         document.getElementById("email1").value = ""
@@ -19,6 +21,14 @@ log.addEventListener("click", function (event) {
 })
 
 
+
+
+
+
+function cerrarSesion() {
+    localStorage.removeItem("logueado");
+    window.location.href = "index.html";
+}
 
 
 

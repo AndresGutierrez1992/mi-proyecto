@@ -6,61 +6,104 @@ let usuarios = [
   { correo: "juan@example.com", contrasena: "juan123" }
 ];
 
+let boto=document.getElementById("registro")
+if (boto) {
+  boto.addEventListener("click", function (e) {
+    e.preventDefault(); 
+  
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+    const passwordVerify = document.getElementById("passwordVerify").value;
+    const condiciones = document.getElementById("condiciones").checked;
+  
+    
+    if (!email || !password || !passwordVerify) {
+      alert("Por favor, completa todos los campos.");
+      return;
+    }
+  
+    if (password !== passwordVerify) {
+      alert("Las contraseñas no coinciden.");
+      return;
+    }
+  
+    if (!condiciones) {
+      alert("Debes aceptar los términos y condiciones.");
+      return;
+    }
+  
+    const nuevoUsuario = {
+      correo: email,
+      contraseña: password
+    };
+  
+   
+    usuarios.push(nuevoUsuario);
+  
+    console.log("Usuarios registrados:", usuarios);
+    alert("Usuario registrado exitosamente ✅");
+  
+    
+    document.querySelector(".formulario").reset();
+  });
+  
+}
+
 
 
 
 const tbody = document.getElementById("tablaUsuarios");
 
-function renderTabla() {
-  tbody.innerHTML = "";
-
-  usuarios.forEach((usuario, index) => {
-    const fila = document.createElement("tr");
-
-    fila.innerHTML = `
-      <td>${index + 1}</td>
-      <td><input type="text" class="form-control" value="${usuario.correo}" disabled></td>
-      <td><input type="password" class="form-control" value="${usuario.contrasena}" disabled></td>
-      <td>
-        <button class="btn btn-warning btn-sm me-1" onclick="editarUsuario(${usuario.id})">Editar</button>
-        <button class="btn btn-danger btn-sm" onclick="eliminarUsuario(${usuario.id})">Eliminar</button>
-      </td>
-    `;
-
-    tbody.appendChild(fila);
-  });
-}
-
-function editarUsuario(id) {
-  const fila = tbody.querySelectorAll("tr")[id - 1];
-  const inputs = fila.querySelectorAll("input");
-
-  const estaEditando = inputs[0].disabled === false;
-
-  if (estaEditando) {
-    // Guardar
-    usuarios[id - 1].correo = inputs[0].value;
-    usuarios[id - 1].contrasena = inputs[1].value;
-    inputs.forEach(input => input.disabled = true);
-  } else {
-    // Activar edición
-    inputs.forEach(input => input.disabled = false);
+if (tbody) {
+  function renderTabla() {
+    tbody.innerHTML = "";
+  
+    usuarios.forEach((usuario, index) => {
+      const fila = document.createElement("tr");
+  
+      fila.innerHTML = `
+        <td>${index + 1}</td>
+        <td><input type="text" class="form-control" value="${usuario.correo}" disabled></td>
+        <td><input type="password" class="form-control" value="${usuario.contrasena}" disabled></td>
+        <td>
+          <button class="btn btn-warning btn-sm me-1" onclick="editarUsuario(${usuario.id})">Editar</button>
+          <button class="btn btn-danger btn-sm" onclick="eliminarUsuario(${usuario.id})">Eliminar</button>
+        </td>
+      `;
+  
+      tbody.appendChild(fila);
+    });
   }
-}
-
-function eliminarUsuario(id) {
-  if (confirm("¿Seguro que deseas eliminar este usuario?")) {
-    usuarios.splice(id - 1, 1);
-    usuarios.forEach((u, i) => u.id = i + 1); // Reordenar IDs
-    renderTabla();
+  
+  function editarUsuario(id) {
+    const fila = tbody.querySelectorAll("tr")[id - 1];
+    const inputs = fila.querySelectorAll("input");
+  
+    const estaEditando = inputs[0].disabled === false;
+  
+    if (estaEditando) {
+      
+      usuarios[id - 1].correo = inputs[0].value;
+      usuarios[id - 1].contrasena = inputs[1].value;
+      inputs.forEach(input => input.disabled = true);
+    } else {
+      
+      inputs.forEach(input => input.disabled = false);
+    }
   }
+  
+  function eliminarUsuario(id) {
+    if (confirm("¿Seguro que deseas eliminar este usuario?")) {
+      usuarios.splice(id - 1, 1);
+      usuarios.forEach((u, i) => u.id = i + 1); // Reordenar IDs
+      renderTabla();
+    }
+  }
+  
+  renderTabla();
+  
+  
 }
-
-renderTabla();
-
-
-console.log(usuarios)
-
 
 
 
@@ -87,10 +130,11 @@ let empleados = [
 ];
 
 function mostrarEmpleados() {
-  const tbody = document.getElementById("bodyEmpleados");
-  tbody.innerHTML = "";
+  const tbodyE = document.getElementById("bodyEmpleados");
+
+  tbodyE.innerHTML = "";
   empleados.forEach((empleado, index) => {
-    tbody.innerHTML += `
+    tbodyE.innerHTML += `
         <tr>
           <td>${empleado.nombre}</td>
           <td>${empleado.apellido}</td>
@@ -125,9 +169,18 @@ function editarEmpleado(index) {
   const direccion = prompt("Nueva dirección:", empleado.direccion);
   const password = prompt("Nueva contraseña:", empleado.password);
 
-  empleados[index] = { nombre, apellido, cedula, correo, telefono, direccion, password };
-  mostrarEmpleados();
+
+  if (!nombre || !apellido || !cedula || !correo || !telefono || !direccion || !password ) {
+     window.alert("informacion no valida campos en blanco")
+  }else{
+    empleados[index] = { nombre, apellido, cedula, correo, telefono, direccion, password };
+    mostrarEmpleados();
+  }
+
+  
 }
+
+
 
 function agregarEmpleado() {
   const nombre = prompt("Nombre:");
@@ -138,8 +191,14 @@ function agregarEmpleado() {
   const direccion = prompt("Dirección:");
   const password = prompt("Contraseña:");
 
+  
+  if (!nombre || !apellido || !cedula || !correo || !telefono || !direccion || !password ) {
+    window.alert("informacion no valida campos en blanco")
+ }else{
+
   empleados.push({ nombre, apellido, cedula, correo, telefono, direccion, password });
   mostrarEmpleados();
+  }
 }
 
 document.addEventListener("DOMContentLoaded", mostrarEmpleados);
