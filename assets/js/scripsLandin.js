@@ -1,32 +1,32 @@
 
 let promociones = [
   {
-    imagen: "assets/images/salchicho.png",
+    imagen: "assets/images/Salchicho.png",
     titulo: "Alimento Premium",
     descripcion: "Nutrición completa sabor pollo y arroz."
   },
   {
-    imagen: "assets/images/salchicho.png",
+    imagen: "assets/images/Salchicho.png",
     titulo: "Rascador para Gatos",
     descripcion: "Entretenimiento para tu michi."
   },
   {
-    imagen: "assets/images/salchicho.png",
+    imagen: "assets/images/Salchicho.png",
     titulo: "Collar Reflectante",
     descripcion: "Mayor seguridad nocturna."
   },
   {
-    imagen: "assets/images/salchicho.png",
+    imagen: "assets/images/Salchicho.png",
     titulo: "Juguete Interactivo",
     descripcion: "Para jugar todo el día."
   },
   {
-    imagen: "assets/images/salchicho.png",
+    imagen: "assets/images/Salchicho.png",
     titulo: "Transportadora Deluxe",
     descripcion: "Viajes cómodos y seguros."
   },
   {
-    imagen: "assets/images/salchicho.png",
+    imagen: "assets/images/Salchicho.png",
     titulo: "Shampoo Antipulgas",
     descripcion: "Limpieza profunda y protección."
   }
@@ -37,17 +37,17 @@ const carouselInner = document.getElementById("carouselItems");
 if (carouselInner) {
   for (let i = 0; i < promociones.length; i += 3) {
     const grupo = promociones.slice(i, i + 3);
-  
+
     const item = document.createElement("div");
     item.className = `carousel-item ${i === 0 ? "active" : ""}`;
-  
+
     const row = document.createElement("div");
     row.className = "row justify-content-center";
-  
+
     grupo.forEach(promociones => {
       const col = document.createElement("div");
       col.className = "col-md-4";
-  
+
       col.innerHTML = `
      
           <div class="card mx-auto mb-2" style="width: 18rem;">
@@ -59,10 +59,10 @@ if (carouselInner) {
                     </div>
                   </div>
         `;
-  
+
       row.appendChild(col);
     });
-  
+
     item.appendChild(row);
     carouselInner.appendChild(item);
   }
@@ -93,12 +93,12 @@ if (tablaPromociones) {
       tablaPromociones.appendChild(row);
     });
   }
-  
+
   function editarPromocion(index) {
     const row = tablaPromociones.rows[index];
     const inputs = row.querySelectorAll("input");
     const boton = row.querySelector("button.btn-warning");
-  
+
     if (inputs[0].disabled) {
       inputs.forEach(input => input.disabled = false);
       boton.textContent = "Guardar";
@@ -110,32 +110,49 @@ if (tablaPromociones) {
       boton.textContent = "Editar";
     }
   }
-  
+
   function eliminarPromocion(index) {
     if (confirm("¿Eliminar esta promoción?")) {
       promociones.splice(index, 1);
       renderPromociones();
     }
   }
-  
+
   document.getElementById("formPromocion").addEventListener("submit", function (e) {
     e.preventDefault();
     const titulo = document.getElementById("tituloNuevo").value.trim();
     const descripcion = document.getElementById("descripcionNueva").value.trim();
     const imagen = document.getElementById("imagenNueva").value.trim();
-  
+
     if (titulo && descripcion && imagen) {
       promociones.push({ titulo, descripcion, imagen });
       renderPromociones();
       this.reset();
     }
   });
-  
+
+
+  // const form = document.getElementById("formPromocion");
+  // if (form) {
+  //   form.addEventListener("submit", function (e) {
+  //     e.preventDefault();
+  //     const titulo = document.getElementById("tituloNuevo").value.trim();
+  //     const descripcion = document.getElementById("descripcionNueva").value.trim();
+  //     const imagen = document.getElementById("imagenNueva").value.trim();
+
+  //     if (titulo && descripcion && imagen) {
+  //       promociones.push({ titulo, descripcion, imagen });
+  //       renderPromociones();
+  //       this.reset();
+  //     }
+  //   });
+  // }
+
   renderPromociones();
-  
-  
+
+
   window.editarPromocion = editarPromocion;
   window.eliminarPromocion = eliminarPromocion;
-  
+
 }
 
